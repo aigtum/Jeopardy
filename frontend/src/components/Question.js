@@ -5,12 +5,35 @@ class Question extends React.Component {
         super(props);
         this.handleMouseClick = this.handleMouseClick.bind(this);
         this.state = {
-            isClicked: false
+            isShowing: false,
+            isAnswered: false,
+            isClosed: false
         }
     }
 
     handleMouseClick(event) {
-        this.setState(state => ({ isClicked: !state.isClicked }));
+        if (!this.state.isShowing) {
+            this.setState(state => ({ isShowing: true }));
+            this.props.pointCallback(this.props.points);
+        }
+        if (this.state.isShowing && !this.state.isAnswered) {
+            this.setState(state => ({isAnswered: true}));
+        }
+        if (this.state.isShowing && this.state.isAnswered && !this.state.isClosed) {
+            this.setState(state => ({isClosed: true}));
+        }
+    }
+
+    renderSwitch(showing, answered, closed) {
+        if (!showing) {
+            return ""
+        } else if (showing && !answered && !closed) {
+            return <p>{this.props.text}</p>
+        } else if (showing && answered && !closed) {
+            return <p>{this.props.answer}</p>
+        } else if (closed) {
+            return <p>x</p>
+        }
     }
 
     render() {
@@ -36,7 +59,7 @@ class Question extends React.Component {
                     <h2 style={question}>
                         <strong>{this.props.points}</strong>
                     </h2>
-                    {this.state.isClicked ? <p>{this.props.answer}</p> : <p>{this.props.text}</p>}
+                    {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
                 </div>
             </div>
             )
