@@ -1,4 +1,5 @@
-import React from "react";
+import React, {Fragment} from "react";
+import MContext from "./TeamProvider";
 
 class Question extends React.Component {
     constructor(props) {
@@ -13,8 +14,8 @@ class Question extends React.Component {
 
     handleMouseClick(event) {
         if (!this.state.isShowing) {
+            this.props.setContextPoints(this.props.points);
             this.setState(state => ({ isShowing: true }));
-            this.props.pointCallback(this.props.points);
         }
         if (this.state.isShowing && !this.state.isAnswered) {
             this.setState(state => ({isAnswered: true}));
@@ -54,14 +55,17 @@ class Question extends React.Component {
         }
 
         return (
-            <div style={questionContainer} onMouseDown={this.handleMouseClick}>
-                <div>
-                    <h2 style={question}>
-                        <strong>{this.props.points}</strong>
-                    </h2>
-                    {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
-                </div>
-            </div>
+
+                    <Fragment>
+                        <div style={questionContainer} onMouseDown={this.handleMouseClick}>
+                            <div>
+                                <h2 style={question}>
+                                    <strong>{this.props.points}</strong>
+                                </h2>
+                                {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
+                            </div>
+                        </div>
+                    </Fragment>
             )
     }
 }

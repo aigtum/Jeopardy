@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import key from "weak-key";
 import Question from "./Question";
 import TeamCard from "./TeamCard";
+import {MContext} from "./TeamProvider";
 
 const TableContainer = {
     display: "flex",
@@ -27,22 +28,6 @@ function createTeamList(numOfTeams) {
     return teamList;
 }
 
-let chosenQuestionPoints = 0;
-let updated = false;
-
-function callbackForQuestionPoints(newPoints) {
-    console.log("Callback: " + newPoints);
-    chosenQuestionPoints = newPoints;
-    updated = true;
-}
-
-function changeButtonValue() {
-    if (updated === true) {
-        updated = false;
-        return chosenQuestionPoints;
-    }
-}
-
 const Table = ({ numOfTeams, topics, questions }) =>
   !topics.length ? (
     <p>Nothing to show</p>
@@ -51,34 +36,39 @@ const Table = ({ numOfTeams, topics, questions }) =>
           <h2 className="subtitle">
               Teams:
           </h2>
-          <h3 onChange={changeButtonValue}>
+          <h3>
               {createTeamList(numOfTeams).map(el =>
-                    <TeamCard points={chosenQuestionPoints} teamNum={el["team"]+1} teamPoints={el["points"]}/>
+                    <TeamCard points={"200"} teamNum={el["team"]+1} teamPoints={el["points"]}/>
                   )
               }
           </h3>
 
-          <div style={QuestionColumnContainer}>
-              {topics
-                  .map(el => (
-                      <div key={"topic"+el.id}>
-                          <h2>{el["text"]}</h2>
-                          {questions
-                              .sort((a, b) => a["points"] - b["points"])
-                              .map(question => (
-                                  (el.id === question["topic"]) ? (
-                                      <Question
-                                          pointCallback={callbackForQuestionPoints}
-                                          key={"question" + question["text"]}
-                                          text={question["text"]}
-                                          answer={question["answer"]}
-                                          points={question["points"]}
-                                      />
-                                  ) : ("")
-                              ))}
-                      </div>
-                  ))}
-          </div>
+          <MContext.Consumer>
+              {context => (
+                  <div style={QuestionColumnContainer}>
+                      {topics
+                          .map(el => (
+                              <div key={"topic"+el.id}>
+                                  <h2>{el["text"]}</h2>
+                                  {questions
+                                      .sort((a, b) => a["points"] - b["points"])
+                                      .map(question => (
+                                          (el.id === question["topic"]) ? (
+                                              <Question
+                                                  key={"question" + question["text"]}
+                                                  text={question["text"]}
+                                                  answer={question["answer"]}
+                                                  points={question["points"]}
+                                                  setContextPoints={() => context.setChosenPoints(question["points"])}
+                                              />
+                                          ) : ("")
+                                      ))}
+                              </div>
+                          ))}
+                  </div>
+              )}
+          </MContext.Consumer>
+
       </div>
   );
 

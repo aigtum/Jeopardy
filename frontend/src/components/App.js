@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import DataProvider from "./DataProvider";
 import Table from "./Table";
+import TeamProvider from "./TeamProvider";
 
 
 class App extends Component {
@@ -48,7 +49,9 @@ class App extends Component {
                 <DataProvider questions="api/questions/"
                               topics="api/topics/"
                               render={(q,t) =>
-                                  <Table numOfTeams={this.state.numberOfTeams} topics={t} questions={q}/>
+                                  <TeamProvider>
+                                      <Table numOfTeams={this.state.numberOfTeams} topics={t} questions={q}/>
+                                  </TeamProvider>
                               }
                 />
         }

@@ -1,4 +1,5 @@
 import React from "react";
+import {MContext} from "./TeamProvider";
 
 class TeamCard extends React.Component {
     constructor(props) {
@@ -9,21 +10,21 @@ class TeamCard extends React.Component {
         }
     }
 
-    updatePoints(points) {
-        console.log(">>> Test "+ points);
-        this.setState({buttonValue: points})
-    }
-
     render() {
         return(
-            <div className={"container"}>
-                <h2>Team {this.props.teamNum}</h2>
-                <h3>{this.props.teamPoints}</h3>
-                <div>
-                    <button onChange={this.updatePoints}>Add {this.state.buttonValue}</button>
-                    <button>Remove {this.state.buttonValue}</button>
-                </div>
-            </div>
+            <MContext.Consumer>
+                {context => (
+                    <div className={"container"}>
+                        <h2>Team {this.props.teamNum}</h2>
+                        <h3>{this.props.teamPoints}</h3>
+                        <div>
+                            <button>Add {context.state.chosenQuestionPoints}</button>
+                            <button>Remove {context.state.chosenQuestionPoints}</button>
+                        </div>
+                    </div>
+                )}
+            </MContext.Consumer>
+
         )
     }
 }
