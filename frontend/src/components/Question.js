@@ -55,18 +55,17 @@ class Question extends React.Component {
         }
 
         return (
-
-                    <Fragment>
-                        <div style={questionContainer} onMouseDown={this.handleMouseClick}>
-                            <div>
-                                <h2 style={question}>
-                                    <strong>{this.props.points}</strong>
-                                </h2>
-                                {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
-                            </div>
-                        </div>
-                    </Fragment>
-            )
+            <Fragment>
+                <div style={questionContainer} onMouseDown={this.handleMouseClick}>
+                    <div>
+                        <h2 style={question}>
+                            <strong>{this.props.points}</strong>
+                        </h2>
+                        {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
+                    </div>
+                </div>
+            </Fragment>
+        )
     }
 }
 

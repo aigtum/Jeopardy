@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import DataProvider from "./DataProvider";
 import Table from "./Table";
-import TeamProvider from "./TeamProvider";
-
+import TeamList from "./TeamList";
+import TeamProvider, {MContext} from "./TeamProvider";
 
 class App extends Component {
     constructor(props) {
@@ -29,8 +29,6 @@ class App extends Component {
     }
 
 
-
-
     render() {
         let isStarted = this.state.started;
         let appView;
@@ -46,14 +44,25 @@ class App extends Component {
                 </form>
         } else {
             appView =
-                <DataProvider questions="api/questions/"
-                              topics="api/topics/"
-                              render={(q,t) =>
-                                  <TeamProvider>
-                                      <Table numOfTeams={this.state.numberOfTeams} topics={t} questions={q}/>
-                                  </TeamProvider>
-                              }
-                />
+                <div>
+
+                    <DataProvider questions="api/questions/"
+                                  topics="api/topics/"
+                                  render={(q,t) =>
+                                      <TeamProvider>
+                                          <TeamList numberOfTeams={this.state.numberOfTeams}/>
+
+                                          <Table
+                                              numberOfTeams={this.state.numberOfTeams}
+                                              topics={t}
+                                              questions={q}
+                                          />
+                                      </TeamProvider>
+
+                                  }
+                    />
+                </div>
+
         }
 
         return (
@@ -61,7 +70,7 @@ class App extends Component {
                 {appView}
             </div>
         )
-        }
+    }
 
 }
 
