@@ -27,19 +27,21 @@ class TeamCard extends React.Component {
     render() {
         const teamCardContainer = {
             display: "flex",
-
-        }
+            flexDirection: "column",
+            paddingRight: "1em",
+            flex: "1",
+            alignItems: "center"
+        };
 
         return(
             <div style={teamCardContainer}>
-                <h2>Team {this.state.teamNumber}</h2>
-                <h3>{this.state.teamPoints}</h3>
+                <h2 className={"subtitle has-text-warning"}>Team {this.state.teamNumber}: {this.state.teamPoints}</h2>
 
                 <MContext.Consumer>
                     {context => (
-                        <div className={"container"}>
-                            <button onClick={() => this.addPoints(context.state.chosenQuestionPoints)}>Add {context.state.chosenQuestionPoints}</button>
-                            <button onClick={() => this.removePoints(context.state.chosenQuestionPoints)}>Remove {context.state.chosenQuestionPoints}</button>
+                        <div className={"buttons"}>
+                            <button className={"button is-primary"} onClick={() => this.addPoints(context.state.chosenQuestionPoints)}>Add {context.state.chosenQuestionPoints}</button>
+                            <button className={"button is-danger"} onClick={() => this.removePoints(context.state.chosenQuestionPoints)}>Remove {context.state.chosenQuestionPoints}</button>
                         </div>
                     )}
                 </MContext.Consumer>

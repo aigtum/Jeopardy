@@ -1,7 +1,52 @@
 import React, {Fragment} from "react";
 import MContext from "./TeamProvider";
 
+const questionContainer = {
+    color: "white",
+    backgroundColor: "darkblue",
+    padding: "10px",
+    flex: "1",
+    width: "11em",
+    height: "11em",
+    display: "flex",
+    alignItems: "center",
+    border: "2px solid gold",
+    borderRadius: "10px",
+    flexDirection: "column",
+    marginBottom: "4px"
+};
+
+const question = {
+    color: "white",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    flex: "1",
+    border: "2px sold gold"
+};
+
+const questionDone = {
+    color: "white",
+    backgroundColor: "slategrey",
+    padding: "10px",
+    flex: "1",
+    width: "11em",
+    height: "11em",
+    display: "flex",
+    alignItems: "center",
+    border: "2px solid gold",
+    borderRadius: "10px",
+    flexDirection: "column",
+    marginBottom: "2px"
+};
+
+const pointText = {
+    color: "gold",
+    paddingBottom: "1em"
+}
+
 class Question extends React.Component {
+
     constructor(props) {
         super(props);
         this.handleMouseClick = this.handleMouseClick.bind(this);
@@ -33,35 +78,17 @@ class Question extends React.Component {
         } else if (showing && answered && !closed) {
             return <p>{this.props.answer}</p>
         } else if (closed) {
-            return <p>x</p>
+            return <p></p>
         }
     }
 
     render() {
-        const questionContainer = {
-            color: "white",
-            backgroundColor: "DodgerBlue",
-            padding: "10px",
-            flex: "1",
-            width: "10em",
-            height: "10em",
-            display: "flex",
-            alignItems: "center"
-        };
-
-        const question = {
-            display: "flex",
-            flex: "1"
-        }
-
         return (
             <Fragment>
-                <div style={questionContainer} onMouseDown={this.handleMouseClick}>
-                    <div>
-                        <h2 style={question}>
-                            <strong>{this.props.points}</strong>
-                        </h2>
-                        {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
+                <div style={this.state.isClosed ? questionDone : questionContainer} onMouseDown={this.handleMouseClick}>
+                    <div style={question}>
+                        <h1 style={pointText} className={"subtitle has-color-gold"}>{this.props.points}</h1>
+                        <p>{this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}</p>
                     </div>
                 </div>
             </Fragment>

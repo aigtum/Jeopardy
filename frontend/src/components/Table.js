@@ -14,8 +14,13 @@ const TableContainer = {
 const QuestionColumnContainer = {
     display: "flex",
     flexDirection: "row",
-    margin: "1em"
+    margin: "1em",
+    alignSelf: "center"
 };
+
+const questionColumn = {
+    margin: "2px",
+}
 
 const Table = ({ numberOfTeams, topics, questions }) =>
     !topics.length ? (
@@ -25,12 +30,11 @@ const Table = ({ numberOfTeams, topics, questions }) =>
             <MContext.Consumer>
                 {context => (
                     <Fragment>
-
                         <div style={QuestionColumnContainer}>
                             {topics
                                 .map(el => (
-                                    <div key={"topic"+el.id}>
-                                        <h2>{el["text"]}</h2>
+                                    <div style={questionColumn} key={"topic"+el.id}>
+                                        <h2 className={"subtitle has-text-warning"}>{el["text"]}</h2>
                                         {questions
                                             .sort((a, b) => a["points"] - b["points"])
                                             .map(question => (

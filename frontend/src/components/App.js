@@ -33,19 +33,38 @@ class App extends Component {
         let isStarted = this.state.started;
         let appView;
 
+        const mainStyle = {
+            color: "white"
+        };
+
+        const form = {
+            display: "flex",
+            flexDirection: "column",
+        };
+
+
+
         if(!isStarted) {
             appView =
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Number of players:
-                        <input type="number" value={this.state.numberOfTeams} onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="Submit"/>
+                <form style={form} onSubmit={this.handleSubmit} className={"form"}>
+                    <div className={"field is-grouped"}>
+                        <div className={"control"}>
+                            <label>
+                                <div className={"subtitle has-text-warning"}>
+                                    Number of players:
+                                </div>
+                            </label>
+                            <input type="number" className={"input"} value={this.state.numberOfTeams} onChange={this.handleChange}/>
+                        </div>
+                    </div>
+
+                    <div className={"field is-grouped"}>
+                        <button className={"button is-link"} type="submit">Submit</button>
+                    </div>
                 </form>
         } else {
             appView =
                 <div>
-
                     <DataProvider questions="api/questions/"
                                   topics="api/topics/"
                                   render={(q,t) =>
@@ -58,7 +77,6 @@ class App extends Component {
                                               questions={q}
                                           />
                                       </TeamProvider>
-
                                   }
                     />
                 </div>
@@ -66,7 +84,7 @@ class App extends Component {
         }
 
         return (
-            <div>
+            <div style={mainStyle}>
                 {appView}
             </div>
         )
