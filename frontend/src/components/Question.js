@@ -1,79 +1,71 @@
 import React, {Fragment} from "react";
-import MContext from "./TeamProvider";
-
-const questionContainer = {
-    color: "white",
-    backgroundColor: "darkblue",
-    padding: "10px",
-    flex: "1",
-    width: "11em",
-    height: "11em",
-    display: "flex",
-    alignItems: "center",
-    border: "2px solid gold",
-    borderRadius: "10px",
-    flexDirection: "column",
-    marginBottom: "4px"
-};
-
-const question = {
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    flex: "1",
-    border: "2px sold gold"
-};
-
-const questionDone = {
-    color: "white",
-    backgroundColor: "slategrey",
-    padding: "10px",
-    flex: "1",
-    width: "11em",
-    height: "11em",
-    display: "flex",
-    alignItems: "center",
-    border: "2px solid gold",
-    borderRadius: "10px",
-    flexDirection: "column",
-    marginBottom: "2px"
-};
 
 const pointText = {
     color: "gold",
     paddingBottom: "1em"
 }
 
+const modalActive = "modal is-active";
+const modalNotActive  = "modal";
+
 class Question extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleMouseClick = this.handleMouseClick.bind(this);
+
         this.state = {
+            isPlaying: false,
             isShowing: false,
             isAnswered: false,
-            isClosed: false
+            isClosed: false,
+            isModalActive: false
         }
+
+        this.url = "/static/assets/JeopardyThemeSong.mp3";
+        this.audio = new Audio(this.url);
+        this.audio.addEventListener('ended', function () {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+
+        this.handleMouseClick = this.handleMouseClick.bind(this);
+        this.play = this.play.bind(this);
+        this.stop = this.stop.bind(this);
+    }
+
+    play(){
+        this.setState({
+            isPlaying: true
+        });
+        this.audio.play();
+    }
+
+    stop() {
+        this.setState({
+            isPlaying: false
+        });
+        this.audio.pause();
     }
 
     handleMouseClick(event) {
         if (!this.state.isShowing) {
             this.props.setContextPoints(this.props.points);
-            this.setState(state => ({ isShowing: true }));
+            this.setState(state => ({ isShowing: true, isModalActive: true }));
         }
-        if (this.state.isShowing && !this.state.isAnswered) {
+        if (this.state.isShowing && !this.state.isAnswered && !this.state.isPlaying) {
+            this.play();
+        }
+        if (this.state.isShowing && !this.state.isAnswered && this.state.isPlaying) {
             this.setState(state => ({isAnswered: true}));
+            this.stop();
         }
         if (this.state.isShowing && this.state.isAnswered && !this.state.isClosed) {
-            this.setState(state => ({isClosed: true}));
+            this.setState(state => ({isClosed: true, isModalActive: false}));
         }
     }
 
     renderSwitch(showing, answered, closed) {
-        if (!showing) {
-            return ""
-        } else if (showing && !answered && !closed) {
+        if (showing && !answered && !closed) {
             return <p>{this.props.text}</p>
         } else if (showing && answered && !closed) {
             return <p>{this.props.answer}</p>
@@ -83,12 +75,41 @@ class Question extends React.Component {
     }
 
     render() {
+        const question = {
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            flex: "1",
+            border: "2px sold gold"
+        };
+
+        const questionContainer = {
+            color: "white",
+            backgroundColor: this.state.isClosed ? "slategrey" : "darkblue",
+            padding: "5px",
+            flex: "1",
+            display: "flex",
+            alignItems: "center",
+            border: "2px solid gold",
+            borderRadius: "10px",
+            flexDirection: "column",
+            marginBottom: "4px",
+        };
+
         return (
             <Fragment>
-                <div style={this.state.isClosed ? questionDone : questionContainer} onMouseDown={this.handleMouseClick}>
-                    <div style={question}>
-                        <h1 style={pointText} className={"subtitle has-color-gold"}>{this.props.points}</h1>
-                        <p>{this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}</p>
+                <div className={"tile notification is-info"} onMouseDown={this.handleMouseClick}>
+                            <div className={"subtitle has-color-gold"}>{this.props.points}</div>
+                            <div className={this.state.isModalActive ? modalActive : modalNotActive}>
+                                <div className="modal-background"></div>
+                                <div className="modal-content">
+                                    <div>
+                                        {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
+                                    </div>
+
+                                </div>
+                                <button className="modal-close is-large" aria-label="close"></button>
                     </div>
                 </div>
             </Fragment>

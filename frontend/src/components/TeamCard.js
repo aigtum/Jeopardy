@@ -26,12 +26,17 @@ class TeamCard extends React.Component {
 
     render() {
         const teamCardContainer = {
-            display: "flex",
-            flexDirection: "column",
-            paddingRight: "1em",
+            color: "white",
+            padding: "5px",
             flex: "1",
-            alignItems: "center"
+            display: "flex",
+            alignItems: "center",
+            border: "2px solid gold",
+            borderRadius: "10px",
+            flexDirection: "column",
+            marginBottom: "4px"
         };
+
 
         return(
             <div style={teamCardContainer}>

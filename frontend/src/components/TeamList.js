@@ -32,7 +32,7 @@ class TeamList extends React.Component {
             flexDirection: "column",
             alignItems: "center",
             margin: "1em"
-        }
+        };
 
         return(
             <div style={mainContainer}>

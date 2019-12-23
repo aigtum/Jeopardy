@@ -11,7 +11,7 @@ class App extends Component {
 
         this.state = {
             started: false,
-            numberOfTeams: 0,
+            numberOfTeams: "3",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -46,22 +46,22 @@ class App extends Component {
 
         if(!isStarted) {
             appView =
-                <form style={form} onSubmit={this.handleSubmit} className={"form"}>
-                    <div className={"field is-grouped"}>
-                        <div className={"control"}>
-                            <label>
+                <div>
+                    <form style={form} onSubmit={this.handleSubmit} className={"form"}>
+                        <div className={"field is-grouped"}>
+                            <div className={"control"}>
                                 <div className={"subtitle has-text-warning"}>
-                                    Number of players:
+                                    Antall spillere:
                                 </div>
-                            </label>
-                            <input type="number" className={"input"} value={this.state.numberOfTeams} onChange={this.handleChange}/>
+                                <input type="number" className={"input"} value={this.state.numberOfTeams} onChange={this.handleChange}/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={"field is-grouped"}>
-                        <button className={"button is-link"} type="submit">Submit</button>
-                    </div>
-                </form>
+                        <div className={"field is-grouped"}>
+                            <button className={"button is-link"} type="submit">Start!</button>
+                        </div>
+                    </form>
+                </div>
         } else {
             appView =
                 <div>
