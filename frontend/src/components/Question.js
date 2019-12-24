@@ -31,9 +31,11 @@ class Question extends React.Component {
         this.handleMouseClick = this.handleMouseClick.bind(this);
         this.play = this.play.bind(this);
         this.stop = this.stop.bind(this);
+        this.openModal = this.openModal.bind(this);
     }
 
     play(){
+        console.log("clicked play");
         this.setState({
             isPlaying: true
         });
@@ -47,18 +49,20 @@ class Question extends React.Component {
         this.audio.pause();
     }
 
+    openModal() {
+        this.setState(state => ({isModalActive: true}));
+    }
+
     handleMouseClick(event) {
         if (!this.state.isShowing) {
             this.props.setContextPoints(this.props.points);
-            this.setState(state => ({ isShowing: true, isModalActive: true }));
+            this.setState(state => ({ isShowing: true}));
         }
-        if (this.state.isShowing && !this.state.isAnswered && !this.state.isPlaying) {
-            this.play();
-        }
-        if (this.state.isShowing && !this.state.isAnswered && this.state.isPlaying) {
+
+        if (this.state.isShowing && !this.state.isAnswered) {
             this.setState(state => ({isAnswered: true}));
-            this.stop();
         }
+
         if (this.state.isShowing && this.state.isAnswered && !this.state.isClosed) {
             this.setState(state => ({isClosed: true, isModalActive: false}));
         }
@@ -85,6 +89,7 @@ class Question extends React.Component {
         };
 
         const questionContainer = {
+            color: "black",
             textAlign: "center",
             justifyContent: "center",
             alignContent: "center",
@@ -94,17 +99,22 @@ class Question extends React.Component {
 
         return (
             <Fragment>
-                <div className={this.state.isClosed ? "tile notification is-warning" : "tile notification is-link"} style={questionContainer} onMouseDown={this.handleMouseClick}>
-                            <p className={"subtitle has-text-warning"} >{this.props.points}</p>
-                            <div className={this.state.isModalActive ? modalActive : modalNotActive}>
-                                <div className="modal-background"></div>
-                                <div className="modal-content">
-                                    <div>
-                                        {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
-                                    </div>
-                                    <button className={"button is-large is-info"}>Spill musikk</button>
-                                </div>
-                                <button className="modal-close is-large" aria-label="close"></button>
+                <div className={this.state.isClosed ? "tile notification is-warning" : "tile notification is-link"} style={questionContainer} onMouseDown={this.openModal}>
+                    <p className={"subtitle has-text-warning"}>{this.props.points}</p>
+                    <div className={this.state.isModalActive ? modalActive : modalNotActive}>
+                        <div className="modal-background"></div>
+                        <div className="modal-card">
+                            <div className={"modal-card-head"}>
+                                <button className={"button is-large is-info"} onClick={this.state.isPlaying ? this.stop : this.play}>{this.state.isPlaying ? "Stop" : "Spill"} musikk</button>
+                            </div>
+
+                            <div className={"modal-card-body"}>
+                                {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
+                            </div>
+                            <div className={"modal-card-foot"}>
+                                <button className={"button is-large is-primary"} onClick={this.handleMouseClick}>Neste</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Fragment>
