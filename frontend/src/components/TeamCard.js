@@ -37,6 +37,10 @@ class TeamCard extends React.Component {
             marginBottom: "4px"
         };
 
+        const btnWidth = {
+            width: "4em"
+        }
+
 
         return(
             <div style={teamCardContainer}>
@@ -45,8 +49,8 @@ class TeamCard extends React.Component {
                 <MContext.Consumer>
                     {context => (
                         <div className={"buttons"}>
-                            <button className={"button is-primary"} onClick={() => this.addPoints(context.state.chosenQuestionPoints)}>Add {context.state.chosenQuestionPoints}</button>
-                            <button className={"button is-danger"} onClick={() => this.removePoints(context.state.chosenQuestionPoints)}>Remove {context.state.chosenQuestionPoints}</button>
+                            <button style={btnWidth} className={"button is-primary is-medium"} onClick={() => this.addPoints(context.state.chosenQuestionPoints)}>+  {context.state.chosenQuestionPoints}</button>
+                            <button style={btnWidth} className={"button is-danger is-medium"} onClick={() => this.removePoints(context.state.chosenQuestionPoints)}>- {context.state.chosenQuestionPoints}</button>
                         </div>
                     )}
                 </MContext.Consumer>

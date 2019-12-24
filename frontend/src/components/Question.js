@@ -85,29 +85,24 @@ class Question extends React.Component {
         };
 
         const questionContainer = {
-            color: "white",
-            backgroundColor: this.state.isClosed ? "slategrey" : "darkblue",
-            padding: "5px",
-            flex: "1",
-            display: "flex",
-            alignItems: "center",
-            border: "2px solid gold",
-            borderRadius: "10px",
-            flexDirection: "column",
-            marginBottom: "4px",
+            textAlign: "center",
+            justifyContent: "center",
+            alignContent: "center",
+            paddingLeft: "40px",
+            paddingTop: "40px"
         };
 
         return (
             <Fragment>
-                <div className={"tile notification is-info"} onMouseDown={this.handleMouseClick}>
-                            <div className={"subtitle has-color-gold"}>{this.props.points}</div>
+                <div className={this.state.isClosed ? "tile notification is-warning" : "tile notification is-link"} style={questionContainer} onMouseDown={this.handleMouseClick}>
+                            <p className={"subtitle has-text-warning"} >{this.props.points}</p>
                             <div className={this.state.isModalActive ? modalActive : modalNotActive}>
                                 <div className="modal-background"></div>
                                 <div className="modal-content">
                                     <div>
                                         {this.renderSwitch(this.state.isShowing, this.state.isAnswered, this.state.isClosed)}
                                     </div>
-
+                                    <button className={"button is-large is-info"}>Spill musikk</button>
                                 </div>
                                 <button className="modal-close is-large" aria-label="close"></button>
                     </div>

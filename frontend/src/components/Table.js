@@ -13,7 +13,11 @@ const TableContainer = {
 
 const questionColumn = {
     margin: "2px",
-}
+};
+
+const alignText = {
+    textAlign: "center"
+};
 
 const Table = ({ numberOfTeams, topics, questions }) =>
     !topics.length ? (
@@ -26,7 +30,7 @@ const Table = ({ numberOfTeams, topics, questions }) =>
                             <Fragment>
                                 {topics
                                     .map(el => (
-                                        <div className={"container"} key={"topic"+el.id}>
+                                        <div className={"container"} style={alignText} key={"topic"+el.id}>
                                             <div className={"tile is-parent is-vertical"}>
                                                 <h2 className={"subtitle has-text-warning"}>{el["text"]}</h2>
                                                 {questions
