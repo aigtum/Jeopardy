@@ -1,10 +1,5 @@
 import React, {Fragment} from "react";
 
-const pointText = {
-    color: "gold",
-    paddingBottom: "1em"
-}
-
 const modalActive = "modal is-active";
 const modalNotActive  = "modal";
 
@@ -19,14 +14,10 @@ class Question extends React.Component {
             isAnswered: false,
             isClosed: false,
             isModalActive: false
-        }
+        };
 
         this.url = "/static/assets/JeopardyThemeSong.mp3";
         this.audio = new Audio(this.url);
-        this.audio.addEventListener('ended', function () {
-            this.currentTime = 0;
-            this.play();
-        }, false);
 
         this.handleMouseClick = this.handleMouseClick.bind(this);
         this.play = this.play.bind(this);
@@ -50,7 +41,9 @@ class Question extends React.Component {
     }
 
     openModal() {
-        this.setState(state => ({isModalActive: true}));
+        if (!this.state.isClosed) {
+            this.setState(state => ({isModalActive: true}));
+        }
     }
 
     handleMouseClick(event) {

@@ -27,7 +27,8 @@ class TeamCard extends React.Component {
     render() {
         const teamCardContainer = {
             color: "white",
-            padding: "5px",
+            padding: "1em",
+            margin: "2em",
             flex: "1",
             display: "flex",
             alignItems: "center",
@@ -44,7 +45,7 @@ class TeamCard extends React.Component {
 
         return(
             <div style={teamCardContainer}>
-                <h2 className={"subtitle has-text-warning"}>Team {this.state.teamNumber}: {this.state.teamPoints}</h2>
+                <h2 className={"subtitle has-text-warning"}>Lag {this.state.teamNumber}: {this.state.teamPoints}</h2>
 
                 <MContext.Consumer>
                     {context => (

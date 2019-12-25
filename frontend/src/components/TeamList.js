@@ -35,11 +35,14 @@ class TeamList extends React.Component {
         };
 
         return(
-            <div style={mainContainer}>
-                <div style={teamCardContainer}>
+            <div>
+                <div className={"level"}>
                     {this.createTeamList(this.state.numberOfTeams)
                         .map(el => (
-                            <TeamCard key={"team"+el.team} teamNumber={el.team} />
+                            <div className={"level-item"}>
+                                <TeamCard key={"team"+el.team} teamNumber={el.team} />
+                            </div>
+
                         ))}
                 </div>
             </div>
