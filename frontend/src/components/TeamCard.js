@@ -35,17 +35,19 @@ class TeamCard extends React.Component {
             border: "2px solid gold",
             borderRadius: "10px",
             flexDirection: "column",
-            marginBottom: "4px"
+            marginBottom: "1em"
         };
 
         const btnWidth = {
+            marginTop: "1em",
             width: "4em"
         }
 
 
         return(
             <div style={teamCardContainer}>
-                <h2 className={"subtitle has-text-warning"}>Lag {this.state.teamNumber}: {this.state.teamPoints}</h2>
+                <p className={"subtitle has-text-warning"}>Lag {this.state.teamNumber}</p>
+                <h2 className={"subtitle has-text-warning"}>{this.state.teamPoints}</h2>
 
                 <MContext.Consumer>
                     {context => (

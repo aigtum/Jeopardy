@@ -62,12 +62,15 @@ class Question extends React.Component {
     }
 
     renderSwitch(showing, answered, closed) {
-        if (showing && !answered && !closed) {
-            return <p>{this.props.text}</p>
+        if (!showing && !closed) {
+            return <h2>{this.props.topic}: {this.props.points} poeng</h2>
+        }
+        else if (showing && !answered && !closed) {
+            return <h2>{}{this.props.text}</h2>
         } else if (showing && answered && !closed) {
-            return <p>{this.props.answer}</p>
+            return <h2>{this.props.answer}</h2>
         } else if (closed) {
-            return <p></p>
+            return <h2></h2>
         }
     }
 
@@ -93,7 +96,7 @@ class Question extends React.Component {
         return (
             <Fragment>
                 <div className={this.state.isClosed ? "tile notification is-warning" : "tile notification is-link"} style={questionContainer} onMouseDown={this.openModal}>
-                    <p className={"subtitle has-text-warning"}>{this.props.points}</p>
+                    <p className={"subtitle has-text-warning"}>{this.state.isClosed ? this.props.points : this.props.points}</p>
                     <div className={this.state.isModalActive ? modalActive : modalNotActive}>
                         <div className="modal-background"></div>
                         <div className="modal-card">

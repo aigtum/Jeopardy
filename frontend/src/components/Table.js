@@ -42,6 +42,7 @@ const Table = ({ numberOfTeams, topics, questions }) =>
                                                                 text={question["text"]}
                                                                 answer={question["answer"]}
                                                                 points={question["points"]}
+                                                                topic={el["text"]}
                                                                 setContextPoints={() => context.setChosenPoints(question["points"])}
                                                             />
                                                         ) : ("")

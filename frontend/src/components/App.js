@@ -16,6 +16,7 @@ class App extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.createTeamNameInput = this.createTeamNameInput.bind(this);
     };
 
 
@@ -28,6 +29,19 @@ class App extends Component {
         this.setState({started: true});
     }
 
+    createTeamNameInput() {
+        let teamList = "";
+        for (let i = 0; i < this.state.numberOfTeams; i++) {
+            teamList = (
+                <div>
+                    <label> {"Lag " + i+":"}
+                        <input/>
+                    </label>
+                </div>
+                )
+        }
+        return teamList;
+    }
 
     render() {
         let isStarted = this.state.started;
@@ -37,23 +51,20 @@ class App extends Component {
             color: "white"
         };
 
-        const form = {
-            display: "flex",
-            flexDirection: "column",
-        };
-
 
 
         if(!isStarted) {
             appView =
-                <div>
-                    <form style={form} onSubmit={this.handleSubmit} className={"form"}>
+                <div className={"container"}>
+                    <form onSubmit={this.handleSubmit}>
                         <div className={"field is-grouped"}>
                             <div className={"control"}>
+                                <h1 className={"title has-text-warning"}>Jeopardy!</h1>
                                 <div className={"subtitle has-text-warning"}>
                                     Antall spillere:
                                 </div>
                                 <input type="number" className={"input"} value={this.state.numberOfTeams} onChange={this.handleChange}/>
+
                             </div>
                         </div>
 
