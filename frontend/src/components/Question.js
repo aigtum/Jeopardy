@@ -63,12 +63,12 @@ class Question extends React.Component {
 
     renderSwitch(showing, answered, closed) {
         if (!showing && !closed) {
-            return <h2>{this.props.topic}: {this.props.points} poeng</h2>
+            return <h2 className={"subtitle"}>{this.props.topic}: {this.props.points} poeng</h2>
         }
         else if (showing && !answered && !closed) {
-            return <h2>{}{this.props.text}</h2>
+            return <h2 className={"subtitle"}>{}{this.props.text}</h2>
         } else if (showing && answered && !closed) {
-            return <h2>{this.props.answer}</h2>
+            return <h2 className={"subtitle"}>{this.props.answer}</h2>
         } else if (closed) {
             return <h2></h2>
         }

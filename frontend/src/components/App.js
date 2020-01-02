@@ -48,7 +48,8 @@ class App extends Component {
         let appView;
 
         const mainStyle = {
-            color: "white"
+            color: "white",
+            fontFamily: 'Montserrat'
         };
 
 
