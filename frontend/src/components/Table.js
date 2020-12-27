@@ -16,8 +16,13 @@ const questionColumn = {
 };
 
 const alignText = {
-    textAlign: "center"
+    textAlign: "center",
 };
+
+const headerClear = {
+    marginTop: "1em",
+    minHeight: "2.5em"
+}
 
 const Table = ({ numberOfTeams, topics, questions }) =>
     !topics.length ? (
@@ -32,7 +37,7 @@ const Table = ({ numberOfTeams, topics, questions }) =>
                                     .map(el => (
                                         <div className={"container"} style={alignText} key={"topic"+el.id}>
                                             <div className={"tile is-parent is-vertical"}>
-                                                <h2 className={"subtitle has-text-warning"}>{el["text"]}</h2>
+                                                <h2 className={"subtitle has-text-warning"} style={headerClear}>{el["text"]}</h2>
                                                 {questions
                                                     .sort((a, b) => a["points"] - b["points"])
                                                     .map(question => (

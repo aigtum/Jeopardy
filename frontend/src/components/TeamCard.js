@@ -7,7 +7,8 @@ class TeamCard extends React.Component {
 
         this.state = {
             teamNumber: this.props.teamNumber,
-            teamPoints: 0
+            teamPoints: 0,
+            teamNames: ["Arild", "Olaug", "Eivind", "Hanne"]
         }
 
         this.addPoints = this.addPoints.bind(this);
@@ -43,10 +44,9 @@ class TeamCard extends React.Component {
             width: "4em"
         }
 
-
         return(
             <div style={teamCardContainer}>
-                <p className={"subtitle has-text-warning"}>Lag {this.state.teamNumber}</p>
+                <p className={"subtitle has-text-warning"}>{this.state.teamNames[this.state.teamNumber - 1]}</p>
                 <h2 className={"subtitle has-text-warning"}>{this.state.teamPoints}</h2>
 
                 <MContext.Consumer>
