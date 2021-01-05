@@ -13,6 +13,7 @@ class Question(models.Model):
     answer = models.CharField(max_length=200)
     points = models.IntegerField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    write = models.BooleanField(default=False)
 
     def __str__(self):
         return self.text
