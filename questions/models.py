@@ -16,4 +16,4 @@ class Question(models.Model):
     write = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.text
+        return f"{self.text} - {self.answer}"

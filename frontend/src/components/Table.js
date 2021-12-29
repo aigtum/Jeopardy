@@ -43,7 +43,7 @@ const Table = ({ numberOfTeams, topics, questions }) =>
                                                     .map(question => (
                                                         (el.id === question["topic"]) ? (
                                                             <Question
-                                                                key={"question_" + question["text"]}
+                                                                key={"question_" + question["text"] + "_" + question["points"]}
                                                                 text={question["text"]}
                                                                 answer={question["answer"]}
                                                                 points={question["points"]}
