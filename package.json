@@ -27,6 +27,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "caniuse-lite": "^1.0.30001571",
     "file-loader": "^5.1.0"
   }
 }
