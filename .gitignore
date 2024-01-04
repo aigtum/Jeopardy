@@ -1,20 +1,4 @@
 .idea/
 node_modules
-Jeopardy/__pycache__/__init__.cpython-38.pyc
-Jeopardy/__pycache__/settings.cpython-38.pyc
-Jeopardy/__pycache__/urls.cpython-38.pyc
-Jeopardy/__pycache__/wsgi.cpython-38.pyc
-frontend/__pycache__/__init__.cpython-38.pyc
-frontend/__pycache__/admin.cpython-38.pyc
-frontend/__pycache__/models.cpython-38.pyc
-frontend/__pycache__/urls.cpython-38.pyc
-frontend/__pycache__/views.cpython-38.pyc
-frontend/migrations/__pycache__/__init__.cpython-38.pyc
-questions/__pycache__/__init__.cpython-38.pyc
-questions/__pycache__/admin.cpython-38.pyc
-questions/__pycache__/models.cpython-38.pyc
-questions/__pycache__/serializers.cpython-38.pyc
-questions/__pycache__/urls.cpython-38.pyc
-questions/__pycache__/views.cpython-38.pyc
-questions/migrations/__pycache__/0001_initial.cpython-38.pyc
-questions/migrations/__pycache__/__init__.cpython-38.pyc
+# pycache
+*.pyc
